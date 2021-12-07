@@ -11,7 +11,12 @@
 
 This app was made in PHP with Laravel, Bootstrap, and Docker.  
 
-### Run this app by typing in Bash:
+### To run this app:
+
+- Rename '.env.example' to '.env'
+
+#### Run in bash:
+
 - alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 
 - sail composer install
@@ -24,7 +29,9 @@ This app was made in PHP with Laravel, Bootstrap, and Docker.
 
 - ./vendor/bin/sail up
 
-- Finally, navigate to http://localhost:81 to view the website.
+#### Finally:
+
+- Navigate to http://localhost:80 to view the website.
 
 
 ## About Laravel
