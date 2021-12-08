@@ -17,17 +17,17 @@ This app was made in PHP with Laravel, Bootstrap, and Docker.
 
 #### Run in bash:
 
+- composer update
+
+- composer install
+
 - alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 
-- sail composer install
-
-- sail artisan migrate
+- sail up -d
 
 - sail npm install
 
 - sail npm run dev
-
-- ./vendor/bin/sail up
 
 #### Finally:
 
