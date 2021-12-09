@@ -9,7 +9,7 @@
 
 ## About This App
 
-This app was made in PHP with Laravel, Bootstrap, and Docker.  
+This app was made possible by Laravel, VueJS, and Docker.  
 
 ### To run this app:
 
@@ -31,7 +31,11 @@ This app was made in PHP with Laravel, Bootstrap, and Docker.
 
 - Navigate to http://localhost:8080 to view the website.
 
-#### To shut down the backend type in bash:
+#### To shut down the backend:
+
+- Navigate to /laravel-auth-webapp in bash.
+
+#### Type in bash:
 
 - sail down
 
