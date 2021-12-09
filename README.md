@@ -17,21 +17,23 @@ This app was made in PHP with Laravel, Bootstrap, and Docker.
 
 #### Run in bash:
 
-- composer update
-
-- composer install
+- composer update && composer install
 
 - alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 
 - sail up -d
 
-- sail npm install
+- cd spa-vue
 
-- sail npm run dev
+- npm install && npm run serve
 
 #### Finally:
 
-- Navigate to http://localhost:80 to view the website.
+- Navigate to http://localhost:8080 to view the website.
+
+#### To shut down the backend type in bash:
+
+- sail down
 
 
 ## About Laravel

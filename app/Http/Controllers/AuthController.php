@@ -76,7 +76,8 @@ class AuthController extends Controller
      */
     public function update(Request $request)
     {
-        auth()->user()->update($request->all());
+        $filtered = array_filter($request->all());
+        auth()->user()->update($filtered);
         return auth()->user();
     }
 
