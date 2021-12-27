@@ -12,10 +12,10 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $fields = $request->validate([
-            'username' => 'required|string',
+            'username' => 'required|string|unique:users,username|max:30',
             'phone' => 'required|digits_between:9,11',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed'
+            'email' => 'required|string|unique:users,email|max:50',
+            'password' => 'required|string|confirmed|max:50'
         ]);
 
         $user = User::create([
@@ -38,8 +38,8 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $fields = $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string'
+            'username' => 'required|string|max:30',
+            'password' => 'required|string|max:50'
         ]);
 
         $user = User::where('username', $fields['username'])->first();
@@ -76,7 +76,14 @@ class AuthController extends Controller
      */
     public function update(Request $request)
     {
+        $fields = $request->validate([
+            'username' => 'sometimes|nullable|unique:users,username|max:30',
+            'phone' => 'sometimes|nullable|digits_between:9,11',
+            'email' => 'sometimes|nullable|unique:users,email|max:50',
+        ]);
+
         $filtered = array_filter($request->all());
+
         auth()->user()->update($filtered);
         return auth()->user();
     }

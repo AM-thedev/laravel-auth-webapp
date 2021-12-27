@@ -1,24 +1,79 @@
 <template>
-  <form action="#" @submit.prevent="submit">
+  <ValidationObserver action="#" ref="observer" v-slot="{ invalid }" tag="form" @submit.prevent="submit()">
     <div>
-      <label for="username">Username</label>
-      <input type="text" name="username" id="username" v-model="form.username">
+      <ValidationProvider 
+        rules="required|max:30" 
+        :bails="false" 
+        v-slot="{ errors }"
+      > 
+        <label for="username">Username</label>
+        <input 
+          type="text" 
+          name="username" 
+          id="username" 
+          v-model="form.username"
+        >
+        <div />
+        <ul style="display:table-row">
+          <li
+            v-for="error in errors" 
+            style="color:FireBrick;list-style-type:none;" 
+            v-bind:key="error"
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </ValidationProvider>
     </div>
+    <p />
     <div>
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" v-model="form.password">
+      <ValidationProvider 
+        rules="required|max:50" 
+        :bails="false" 
+        v-slot="{ errors }"
+      >
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          name="password" 
+          id="password" 
+          v-model="form.password"
+        >
+        <div />
+        <ul style="display:table-row">
+          <li
+            v-for="error in errors" 
+            style="color:FireBrick;list-style-type:none;" 
+            v-bind:key="error"
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </ValidationProvider>
     </div>
+    <p />
     <div>
-      <button type="submit">
+      <button type="submit" :disabled="invalid">
         Sign in
       </button>
     </div>
-  </form>
+  </ValidationObserver>
 </template>
 
 <script>
-  //import axios from 'axios'
   import { mapActions } from 'vuex'
+  import { ValidationObserver, ValidationProvider ,extend } from 'vee-validate';
+  import { required, max } from 'vee-validate/dist/rules';
+
+  extend('max', {
+    ...max,
+    message: `Maximum characters reached.`
+  })
+
+  extend('required', {
+    ...required,
+    message: 'This field is required'
+  });
 
   export default {
     name: 'SignIn',
@@ -40,6 +95,11 @@
         await this.signIn(this.form)
         this.$router.replace({ name: 'home' })
       }
+    },
+
+    components: {
+      ValidationObserver,
+      ValidationProvider
     }
   }
 </script>
